@@ -51,6 +51,25 @@ const getAllStudent = async (req: Request, res: Response) => {
   }
 };
 
+const getSingleStudent = async (req: Request, res: Request) => {
+  try {
+    const { studentId: id } = req.params;
+    const data = await studentServices.getSingleStudentFromDB(id as string);
+
+    res.status(200).json({
+      success: false,
+      message: 'successfully retrieved the user.',
+      data: data,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'can not get the user requested! something went wrong',
+      error,
+    });
+  }
+};
+
 const deleteStudent = async (req: Request, res: Response) => {
   try {
     const { studentId: id } = req.params;
@@ -74,4 +93,5 @@ export const studentControllers = {
   createStudent,
   deleteStudent,
   getAllStudent,
+  getSingleStudent,
 };
