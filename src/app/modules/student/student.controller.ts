@@ -34,6 +34,26 @@ const createStudent = async (req: Request, res: Response) => {
   }
 };
 
+const deleteStudent = async (req: Request, res: Response) => {
+  try {
+    const { studentId: id } = req.params;
+    const result = await studentServices.deleteStudentFromDB(id);
+
+    res.status(200).json({
+      success: true,
+      message: 'Your profile is deleted!',
+      data: result,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'could not delete user. something wrong',
+      error,
+    });
+  }
+};
+
 export const studentControllers = {
   createStudent,
+  deleteStudent,
 };
