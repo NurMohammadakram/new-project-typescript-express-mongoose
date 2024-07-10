@@ -34,6 +34,23 @@ const createStudent = async (req: Request, res: Response) => {
   }
 };
 
+const getAllStudent = async (req: Request, res: Response) => {
+  try {
+    const result = await studentServices.getAllStudentFromDB();
+    res.status(200).json({
+      success: true,
+      message: 'Successfully retrieved all student data',
+      data: result,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'can not get user at now. something wrong!',
+      error,
+    });
+  }
+};
+
 const deleteStudent = async (req: Request, res: Response) => {
   try {
     const { studentId: id } = req.params;
@@ -56,4 +73,5 @@ const deleteStudent = async (req: Request, res: Response) => {
 export const studentControllers = {
   createStudent,
   deleteStudent,
+  getAllStudent,
 };
