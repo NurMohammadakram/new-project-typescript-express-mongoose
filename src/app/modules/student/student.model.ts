@@ -29,7 +29,8 @@ export const localGuardianSchema = new Schema<ILocalGuardian>({
 });
 
 export const studentSchema = new Schema<IStudent>({
-  id: { type: String },
+  id: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
   name: { type: userNameSchema, required: true },
   gender: {
     type: String,
@@ -40,7 +41,7 @@ export const studentSchema = new Schema<IStudent>({
     required: true,
   },
   dateOfBirth: { type: String, required: true },
-  email: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
   contactNo: { type: String, required: true },
   emergencyContactNo: { type: String, required: true },
   bloodGroup: {
@@ -53,8 +54,12 @@ export const studentSchema = new Schema<IStudent>({
   presentAddress: { type: String, required: true },
   guardian: { type: guardianSchema, required: true },
   localGuardian: { type: localGuardianSchema, required: true },
-  profileImg: { type: String, optional: true },
+  profileImg: { type: String },
   isDeleted: { type: String, default: false, optional: true },
+});
+
+studentSchema.pre('save', function (next) {
+  next();
 });
 
 export const StudentModel = model<IStudent>('Student', studentSchema);
