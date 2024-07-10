@@ -1,10 +1,12 @@
 import { model, Schema } from 'mongoose';
+import bcrypt from 'bcrypt';
 import {
   IGuardian,
   ILocalGuardian,
   IStudent,
   IUserName,
 } from './student.interface';
+import config from '../../config';
 
 export const userNameSchema = new Schema<IUserName>({
   firstName: { type: String, required: true },
@@ -58,7 +60,18 @@ export const studentSchema = new Schema<IStudent>({
   isDeleted: { type: String, default: false, optional: true },
 });
 
-studentSchema.pre('save', function (next) {
+studentSchema.pre('save', async function (next) {
+  const student = this as IStudent;
+
+  const hashedPassword = await bcrypt.hash(
+    student.password,
+    Number(config.bcrypt_salt_round),
+  );
+  student.password = hashedPassword;
+  next();
+});
+studentSchema.post('save', async function (doc, next) {
+  doc.password = '';
   next();
 });
 
