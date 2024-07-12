@@ -70,8 +70,19 @@ studentSchema.pre('save', async function (next) {
   student.password = hashedPassword;
   next();
 });
+
 studentSchema.post('save', async function (doc, next) {
   doc.password = '';
+  next();
+});
+
+studentSchema.pre('find', async function (next) {
+  await this.find({ isDeleted: { $ne: true } });
+  next();
+});
+
+studentSchema.pre('findOne', async function (next) {
+  await this.find({ isDeleted: { $ne: true } });
   next();
 });
 
