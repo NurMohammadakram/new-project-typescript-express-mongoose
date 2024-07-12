@@ -1,8 +1,8 @@
 export type Iuser = {
   id: string;
   password: string;
-  needsPasswordChange: boolean;
+  needsPasswordChange?: boolean;
   role: 'student' | 'faculty' | 'admin';
   status: 'in-progress' | 'blocked';
-  isDeleted: boolean;
+  isDeleted?: boolean;
 };
