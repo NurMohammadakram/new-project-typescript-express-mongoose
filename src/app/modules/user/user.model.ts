@@ -13,6 +13,7 @@ export const userSchema = new Schema<Iuser>(
       enum: {
         values: ['student', 'faculty', 'admin'],
       },
+      optional: true
     },
     status: {
       type: String,
@@ -44,4 +45,4 @@ userSchema.post('save', async function (doc, next) {
   next();
 });
 
-export const User = model<Iuser>('User', userSchema);
+export const UserModel = model<Iuser>('User', userSchema);

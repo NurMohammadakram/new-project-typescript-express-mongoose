@@ -1,7 +1,7 @@
 import express, { Application } from 'express';
 import cors from 'cors';
 import { studentRouter } from './app/modules/student/student.route';
-import { userRouters } from './app/modules/user/user.route';
+import { userRouter } from './app/modules/user/user.route';
 import globalErrorHandler from './app/middlewares/globalErrorhandler';
 import notFound from './app/middlewares/notFound';
 
@@ -12,9 +12,9 @@ app.use(cors());
 
 // routers
 app.use('/api/v1/students', studentRouter);
+app.use('/api/v1/users', userRouter);
 
-app.use('/api/v1/users', userRouters);
-
+//global errors
 app.use(globalErrorHandler);
 
 // Not found route
