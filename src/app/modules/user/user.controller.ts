@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { userServices } from './user.service';
+import sendResponse from '../../middlewares/utils/sendResponse';
 
 const createStudent = async (
   req: Request,
@@ -8,12 +9,8 @@ const createStudent = async (
 ) => {
   try {
     const { password, student: studentData } = req.body;
-    const data = await userServices.createStudentIntoDB(password, studentData);
-    res.status(200).json({
-      success: true,
-      message: 'student created successfully',
-      data: data,
-    });
+    const result = await userServices.createStudentIntoDB(password, studentData);
+    sendResponse(res, {message: 'student created successfully',  data: result})
   } catch (error) {
     next(error);
   }
