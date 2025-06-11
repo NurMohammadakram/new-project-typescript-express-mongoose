@@ -1,7 +1,7 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { studentServices } from './student.service';
 
-const getAllStudent = async (req: Request, res: Response) => {
+const getAllStudent = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const result = await studentServices.getAllStudentFromDB();
     res.status(200).json({
@@ -10,15 +10,11 @@ const getAllStudent = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: 'can not get user at now. something wrong!',
-      error,
-    });
+    next(error)
   }
 };
 
-const getSingleStudent = async (req: Request, res: Response) => {
+const getSingleStudent = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { studentId: id } = req.params;
     const data = await studentServices.getSingleStudentFromDB(id as string);
@@ -29,15 +25,11 @@ const getSingleStudent = async (req: Request, res: Response) => {
       data: data,
     });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: 'can not get the user requested! something went wrong',
-      error,
-    });
+    next(error)
   }
 };
 
-const updateStudent = async (req: Request, res: Response) => {
+const updateStudent = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { studentId: id } = req.params;
     const data = req.body;
@@ -49,14 +41,11 @@ const updateStudent = async (req: Request, res: Response) => {
       data: updateInfo,
     });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: 'can not update user info. something went wrong!',
-    });
+    next(error)
   }
 };
 
-const deleteStudent = async (req: Request, res: Response) => {
+const deleteStudent = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { studentId: id } = req.params;
     const result = await studentServices.deleteStudentFromDB(id);
@@ -67,11 +56,7 @@ const deleteStudent = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: 'could not delete user. something wrong',
-      error,
-    });
+    next(error)
   }
 };
 

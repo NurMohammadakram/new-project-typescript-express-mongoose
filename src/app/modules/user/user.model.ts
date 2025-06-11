@@ -6,7 +6,7 @@ import config from '../../config';
 export const userSchema = new Schema<Iuser>(
   {
     id: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
+    password: { type: String, optional: true },
     needsPasswordChange: { type: Boolean, optional: true, default: true },
     role: {
       type: String,
