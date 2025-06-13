@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import userZodValidationSchema from '../user/user.validation.zod';
 
 const alphabeticRegex = /^[A-Za-z]+$/;
 
@@ -50,7 +51,10 @@ const localGuardianZodValidationSchema = z.object({
   address: z.string().min(1, "Local guardian's address is required").trim(),
 });
 
-const studentZodValidatonSchema = z.object({
+const createStudentZodValidatonSchema = z.object({
+  body: z.object({
+    password: userZodValidationSchema,
+    student: z.object({
   name: userNameZodValidatonSchema,
   gender: z.enum(['male', 'female'], {
     errorMap: () => ({ message: 'Gender must be either "male" or "female"' }),
@@ -74,8 +78,9 @@ const studentZodValidatonSchema = z.object({
   guardian: guardianZodValidationSchema,
   localGuardian: localGuardianZodValidationSchema,
   profileImg: z.string().optional(),
+})
+  })
+    
 });
 
-export const studentValidation = {
-  studentZodValidatonSchema
-}
+export const studentValidations = {createStudentZodValidatonSchema };
