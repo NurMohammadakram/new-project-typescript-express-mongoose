@@ -53,7 +53,8 @@ const localGuardianZodValidationSchema = z.object({
 
 const createStudentZodValidatonSchema = z.object({
   body: z.object({
-    password: userZodValidationSchema,
+    password: userZodValidationSchema.optional(),
+
     student: z.object({
   name: userNameZodValidatonSchema,
   gender: z.enum(['male', 'female'], {
@@ -78,9 +79,8 @@ const createStudentZodValidatonSchema = z.object({
   guardian: guardianZodValidationSchema,
   localGuardian: localGuardianZodValidationSchema,
   profileImg: z.string().optional(),
-})
   })
-    
+  })
 });
 
 export const studentValidations = {createStudentZodValidatonSchema };
