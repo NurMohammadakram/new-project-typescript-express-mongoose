@@ -68,12 +68,12 @@ export const studentSchema = new Schema<IStudent>(
   },
 );
 
-studentSchema.pre('find', async function (next) {
+studentSchema.pre('find', function (next) {
   this.where({ isDeleted: { $ne: true } });
   next();
 });
 
-studentSchema.pre('findOne', async function (next) {
+studentSchema.pre('findOne', function (next) {
   this.where({ isDeleted: { $ne: true } });
   next();
 });
