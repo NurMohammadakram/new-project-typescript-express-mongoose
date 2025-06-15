@@ -7,9 +7,42 @@ const createAcademicSemesterIntoDB = async(payload: IAcademicSemester) => {
         throw new Error('Invalid semester code for the given semester name');
     }
     const result = await AcademicSemesterModel.create(payload)
+
     return result;
 }
 
+const getSingleAcademicSemesterFromDB = async(id: string) => {
+    const result = await AcademicSemesterModel.findById(id);
+    // if (!result) {
+    //     throw new Error('Academic semester not found');
+    // }
+    return result;
+}
+
+const getAllAcademicSemestersFromDB = async() => {
+    const result = await AcademicSemesterModel.find({});
+    if (!result || result.length === 0) {
+        throw new Error('No academic semesters found');
+    }
+    return result;
+}
+
+const updateAcademicSemesterIntoDB = async(id: string, payload: Partial<IAcademicSemester>) => {
+    // if( semesterCodeMapper[payload.name] !== payload.code) {
+    //     throw new Error('Invalid semester code for the given semester name');
+    // }
+    const updateResult = await AcademicSemesterModel.findByIdAndUpdate({_id: id}, payload, {
+        new: true,})
+    // if (!updateResult) {
+    //     throw new Error('Academic semester not found');
+    // }
+    return updateResult;
+
+}
+
 export const academicSemesterServices = {
-    createAcademicSemesterIntoDB
+    createAcademicSemesterIntoDB,
+    getSingleAcademicSemesterFromDB,
+    getAllAcademicSemestersFromDB,
+    updateAcademicSemesterIntoDB,
 }
