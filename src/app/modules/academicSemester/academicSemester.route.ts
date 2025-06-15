@@ -7,3 +7,6 @@ import validationRequest from '../../middlewares/validateRequest';
 const router = Router();
 
 router.post('/create-semester',  validationRequest(academicSemesterValidation.createAcademicSemesterValidation), academicSemesterControllers.createAcademicSemester);
+
+
+export const academicSemesterRoutes = router;
