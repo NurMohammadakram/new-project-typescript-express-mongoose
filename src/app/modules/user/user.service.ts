@@ -6,6 +6,7 @@ import { UserModel } from './user.model';
 
 const createStudentIntoDB = async (password: string, studentData: IStudent) => {
   const userData: Partial<Iuser> = {};
+  
   userData.id = '2030100006';
   userData.password = password || config.default_password;
   userData.role = 'student';
