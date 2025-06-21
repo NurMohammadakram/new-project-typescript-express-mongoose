@@ -9,7 +9,7 @@ const createAcademicFaculty = catchAsync(async (req, res) => {
     );
 
     sendResponse(res, {
-        message: 'Academic semester created successfully',
+        message: 'Academic faculty created successfully',
         data: result,
     });
 

@@ -29,7 +29,8 @@ const updateAcademicFacultyIntoDB = async(id: string, payload: Partial<IAcademic
     const result = await AcademicFacultyModel.findByIdAndUpdate(id, payload, { new: true });
     if (!result) {
         throw new Error(`Failed to update academic faculty with id: ${id}`);
-    }       
+    }   
+    return result;    
 }
 
 export const academicFacultyServices = {
