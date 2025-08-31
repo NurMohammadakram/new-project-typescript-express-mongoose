@@ -2,7 +2,7 @@ import { IAcademicDepartment } from "./academicDepartment.interface";
 import { AcademicDepartment } from "./academicDepartment.model";
 
 
-const createAcacdemicDepartmentIntoDB = async (payload: IAcademicDepartment) => {
+const createAcademicDepartmentIntoDB = async (payload: IAcademicDepartment) => {
     const result = await AcademicDepartment.create(payload);
     return result;
 }
@@ -23,7 +23,7 @@ const updateAcademicDepartmentIntoDB = async (id: string, payload: Partial<IAcad
 }
 
 export const academicDepartmentServices = {
-    createAcacdemicDepartmentIntoDB,
+    createAcademicDepartmentIntoDB,
     getAllAcademicDepartmentFromDB,
     getSingleAcademicDepartmentFromDB,
     updateAcademicDepartmentIntoDB,

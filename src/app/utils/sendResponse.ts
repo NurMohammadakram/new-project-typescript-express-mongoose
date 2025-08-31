@@ -6,11 +6,11 @@ type TResponse<T> = {
     data : T
 }
 
-const sendResponse = <T>(res: Response, result: TResponse<T> ) => {
+const sendResponse = <T>(res: Response, data: TResponse<T> ) => {
     return res.status(httpStatus.OK).json({
           success: true,
-          message: result.message,
-          data: result.data,
+          message: data.message,
+          data: data.data,
     });
 }
 
