@@ -6,4 +6,4 @@ import validationRequest from '../../middlewares/validateRequest';import { stude
 const router = Router();
 router.post('/create-student', validationRequest(studentValidations.createStudentZodValidatonSchema), userControllers.createStudent);
 
-export const userRouter = router;
+export const userRoutes = router;

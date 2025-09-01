@@ -6,4 +6,4 @@ router.get('/', studentControllers.getAllStudent);
 router.get('/:studentId', studentControllers.getSingleStudent);
 router.put('/:studentId', studentControllers.updateStudent);
 router.delete('/:studentId', studentControllers.deleteStudent);
-export { router as studentRouter };
+export { router as studentRoutes };

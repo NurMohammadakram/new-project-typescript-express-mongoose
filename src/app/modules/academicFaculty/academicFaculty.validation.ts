@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 
-const createAcademicFacultyValidationSchema = z.object({
+export const createAcademicFacultyValidationSchema = z.object({
   body: z.object({
   name: z
     .string({
@@ -19,5 +19,3 @@ export const updateAcademicFacultyValidationSchema = z.object({
     .optional()
 })
 })
-
-export default createAcademicFacultyValidationSchema;
