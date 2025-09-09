@@ -36,7 +36,7 @@ export const studentSchema = new Schema<IStudent>(
       required: true,
       unique: true,
       ref: 'User',
-    },
+    }, 
     name: { type: userNameSchema, required: true },
     gender: {
       type: String,
@@ -61,6 +61,15 @@ export const studentSchema = new Schema<IStudent>(
     guardian: { type: guardianSchema, required: true },
     localGuardian: { type: localGuardianSchema, required: true },
     profileImg: { type: String, optional: true },
+    academicSemester: {
+      type: Schema.Types.ObjectId,
+      ref: 'AcademicSemester',
+    },
+    academicDepartment: {
+      type: Schema.Types.ObjectId,
+      ref: 'AcademicDepartment'
+    }
+    ,
     isDeleted: { type: String, default: false, optional: true },
   },
   {
